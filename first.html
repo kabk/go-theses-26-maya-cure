@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Forbidden fruit smells the sweetest</title>
+    <link rel="stylesheet" href="assets/css/normalize.css" />
+    <link rel="stylesheet" href="assets/css/style.css?ver=1.0" />
+  </head>
+  <body>
+    <div class="landing" id="landing">
+      <div class="phase-meta" aria-label="Document metadata">
+        <span class="phase-meta-line">Research Document</span>
+        <span class="phase-meta-line">Kabk 2026</span>
+        <span class="phase-meta-line">Maya Curé</span>
+      </div>
+      <div class="landing-heading">
+        Forbidden fruit smells the sweetest:
+        <br />
+        How perfume carries the nostalgia of Eden
+      </div>
+    </div>
+
+    <script>
+      (() => {
+        const landing = document.getElementById("landing");
+        if (!landing) return;
+        let done = false;
+        const go = () => {
+          if (done) return;
+          done = true;
+          landing.classList.add("is-hidden");
+          setTimeout(() => {
+            window.location.href = "index.html?stage=2";
+          }, 1200);
+        };
+        addEventListener(
+          "wheel",
+          (e) => {
+            e.preventDefault();
+            go();
+          },
+          { passive: false },
+        );
+        addEventListener("keydown", (e) => {
+          if (["ArrowDown", "PageDown", " ", "Enter", "ArrowRight"].includes(e.key)) {
+            e.preventDefault();
+            go();
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
