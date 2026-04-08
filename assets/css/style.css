@@ -22,6 +22,56 @@ html {
   color: var(--color-text);
   background-color: var(--color-background);
   max-width: 100%;
+  scroll-behavior: smooth;
+}
+
+* {
+  scrollbar-color: #c40000 #ffffff;
+  scrollbar-width: thin;
+}
+
+*::-webkit-scrollbar {
+  width: 14px;
+  height: 14px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #ffffff !important;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #c40000 !important;
+  border-radius: 0;
+  border: 0 !important;
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background: #c40000 !important;
+}
+
+html,
+body {
+  scrollbar-color: #c40000 #ffffff !important;
+  scrollbar-width: thin !important;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 14px !important;
+  height: 14px !important;
+}
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+  background: #ffffff !important;
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background: #c40000 !important;
+  border-radius: 0 !important;
+  border: 0 !important;
 }
 
 html:has(.intro-abstract-modal[open]) {
@@ -256,7 +306,7 @@ body {
   height: auto;
   padding: max(2.95rem, 5.35vmin) max(2.7rem, 4.9vmin);
   /* overflow-x:hidden on body breaks position:sticky for poem cards (scroll containment) */
-  overflow-y: auto;
+  overflow-y: scroll;
 }
 
 .intro-screen {
@@ -533,6 +583,26 @@ body {
   background: #ffffff;
   padding: var(--margin-m);
   box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: #c40000 #ffffff;
+  -ms-overflow-style: auto;
+}
+
+.intro-abstract-panel::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  display: block;
+}
+
+.intro-abstract-panel::-webkit-scrollbar-track {
+  background: #ffffff;
+  border-radius: 0;
+}
+
+.intro-abstract-panel::-webkit-scrollbar-thumb {
+  background: #c40000;
+  border-radius: 0;
+  border: 0;
 }
 
 .intro-abstract-panel-head {
@@ -702,6 +772,26 @@ body {
   overflow-y: auto;
   overflow-x: hidden;
   box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: #c40000 #ffffff;
+  -ms-overflow-style: auto;
+}
+
+.corner-menu::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  display: block;
+}
+
+.corner-menu::-webkit-scrollbar-track {
+  background: #ffffff;
+  border-radius: 0;
+}
+
+.corner-menu::-webkit-scrollbar-thumb {
+  background: #c40000;
+  border-radius: 0;
+  border: 0;
 }
 
 .corner-menu-wrap:not([open]) .corner-menu {
@@ -733,6 +823,12 @@ body {
   color: var(--color-text);
   text-decoration: underline;
   cursor: pointer;
+}
+
+@media (min-width: 780px) {
+  .chapter-menu-close {
+    display: none;
+  }
 }
 
 .toc-num {
@@ -1061,8 +1157,8 @@ p {
     top: 24vh;
     padding: var(--margin);
   }
-  .scroll-flash-rect:focus,
-  .scroll-flash-rect:focus-within {
+  .scroll-flash-rect:not(.is-dismissed):focus,
+  .scroll-flash-rect:not(.is-dismissed):focus-within {
     opacity: 1 !important;
     visibility: visible !important;
     pointer-events: none !important;
@@ -1125,6 +1221,11 @@ p {
     top: auto;
     left: auto;
     margin-left: auto;
+  }
+  .intro-abstract-panel {
+    max-width: 100%;
+    max-height: calc(100dvh - 1.2rem);
+    padding: 0.7rem;
   }
   .site-head-bar::before {
     left: 0;

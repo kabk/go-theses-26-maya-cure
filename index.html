@@ -18,9 +18,9 @@
       content="Name of the author/owner of the webpage's content"
     />
 
-    <link rel="icon" type="image/png" href="assets/images/favicon/apple2.png" />
-    <link rel="shortcut icon" type="image/png" href="assets/images/favicon/apple2.png" />
-    <link rel="apple-touch-icon" href="assets/images/favicon/apple2.png" />
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon/Asset%208.svg" />
+    <link rel="shortcut icon" type="image/svg+xml" href="assets/images/favicon/Asset%208.svg" />
+    <link rel="apple-touch-icon" href="assets/images/favicon/Asset%208.svg" />
 
     <title>Forbidden Fruit Smells The Sweetest</title>
 
@@ -250,7 +250,7 @@
     <div class="layout">
       <section class="intro-screen" id="intro-screen">
         <h1 class="intro-title">
-          Forbidden fruits <span class="intro-title__italic">smell</span> the sweetest:<br />
+          Forbidden fruit <span class="intro-title__italic">smells</span> the sweetest:<br />
           <span class="intro-title__subline">How perfume carries the nostalgia of <span class="intro-title__eden">Eden</span></span>
         </h1>
         <p class="intro-lead">
@@ -670,6 +670,7 @@
       var m = document.querySelector(".corner-menu-wrap");
       var c = document.querySelector(".chapter-menu-close");
       var links = document.querySelectorAll(".corner-menu a[href^='#']");
+      var poems = document.querySelectorAll(".scroll-flash-poem");
       function u() {
         if (!t || !s.length) return;
         var y = (h ? h.offsetHeight : 88) + 12;
@@ -690,6 +691,12 @@
       links.forEach(function (a) {
         a.addEventListener("click", function () {
           if (m) m.removeAttribute("open");
+        });
+      });
+      poems.forEach(function (p) {
+        p.addEventListener("click", function () {
+          var card = p.closest(".scroll-flash-rect");
+          if (card) card.classList.add("is-dismissed");
         });
       });
     </script>
