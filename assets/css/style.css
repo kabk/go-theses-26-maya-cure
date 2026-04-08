@@ -84,7 +84,7 @@ html:has(.intro-abstract-modal[open]) body {
 }
 
 /* Poems */
-.poem-stage {
+.poem-overlay {
   position: absolute;
   top: 320vh;
   left: 0;
@@ -103,31 +103,31 @@ html:has(.intro-abstract-modal[open]) body {
   z-index: 30;
 }
 
-.poem-stage--b,
-.poem-stage--c,
-.poem-stage--d {
+.poem-overlay--b,
+.poem-overlay--c,
+.poem-overlay--d {
   height: 180vh;
 }
 
-.poem-stage--b {
+.poem-overlay--b {
   top: 575vh;
 }
 
-.poem-stage--c {
+.poem-overlay--c {
   top: 815vh;
 }
 
-.poem-stage--d {
+.poem-overlay--d {
   top: 1045vh;
 }
 
-.scroll-flash-rect {
-  --scroll-flash-w: min(16rem, calc(100% - 2 * var(--margin-m)));
+.poem-card {
+  --poem-card-w: min(16rem, calc(100% - 2 * var(--margin-m)));
   position: sticky;
   top: 26vh;
   flex-shrink: 0;
   margin-right: 0;
-  width: var(--scroll-flash-w);
+  width: var(--poem-card-w);
   max-height: min(70vh, 24rem);
   min-height: 8rem;
   box-sizing: border-box;
@@ -148,31 +148,31 @@ html:has(.intro-abstract-modal[open]) body {
   cursor: pointer;
 }
 
-.scroll-flash-rect:focus,
-.scroll-flash-rect:focus-within {
+.poem-card:focus,
+.poem-card:focus-within {
   opacity: 0 !important;
   visibility: hidden !important;
   pointer-events: none !important;
 }
 
-.scroll-flash-rect:focus {
+.poem-card:focus {
   outline: none;
 }
 
-.scroll-flash-rect.is-dismissed {
+.poem-card.is-dismissed {
   opacity: 0 !important;
   visibility: hidden !important;
   pointer-events: none !important;
 }
 
-.scroll-flash-rect.is-dismissed .scroll-flash-poem {
+.poem-card.is-dismissed .poem-card-text {
   cursor: default;
   pointer-events: none;
 }
 
 /* Keep poem motion mostly in CSS instead of JS */
 @supports (animation-timeline: view()) {
-  .scroll-flash-rect {
+  .poem-card {
     opacity: 0;
     transform: translateY(1.35rem);
     animation: poem-pop linear both;
@@ -200,7 +200,7 @@ html:has(.intro-abstract-modal[open]) body {
   }
 }
 
-.scroll-flash-rect::before {
+.poem-card::before {
   content: "";
   position: absolute;
   top: -2.75rem;
@@ -247,22 +247,22 @@ html:has(.intro-abstract-modal[open]) body {
   mask-size: 100% 100%;
 }
 
-.scroll-flash-rect--b {
+.poem-card--b {
   top: 34vh;
   margin-right: 9vw;
 }
 
-.scroll-flash-rect--c {
+.poem-card--c {
   top: 56vh;
   margin-right: 18vw;
 }
 
-.scroll-flash-rect--d {
+.poem-card--d {
   top: 46vh;
   margin-right: 4vw;
 }
 
-.scroll-flash-poem {
+.poem-card-text {
   position: relative;
   z-index: 1;
   margin: 0;
@@ -282,12 +282,12 @@ html:has(.intro-abstract-modal[open]) body {
   -webkit-overflow-scrolling: touch;
 }
 
-.scroll-flash-poem p {
+.poem-card-text p {
   margin: 0 0 var(--margin-s);
   text-align: left;
 }
 
-.scroll-flash-poem-attrib {
+.poem-card-attrib {
   margin: 0;
   font-size: var(--font-size-caption);
   font-style: normal;
@@ -1144,31 +1144,31 @@ p {
     padding: max(1.1rem, 2.8vmin) max(1rem, 2.6vmin);
     overflow-y: visible;
   }
-  .poem-stage {
+  .poem-overlay {
     overflow: visible;
   }
-  .scroll-flash-rect,
-  .scroll-flash-rect--b,
-  .scroll-flash-rect--c,
-  .scroll-flash-rect--d {
-    --scroll-flash-w: min(17rem, calc(100vw - 2rem));
+  .poem-card,
+  .poem-card--b,
+  .poem-card--c,
+  .poem-card--d {
+    --poem-card-w: min(17rem, calc(100vw - 2rem));
     max-width: calc(100vw - 1.6rem);
     position: sticky;
     top: 24vh;
     padding: var(--margin);
   }
-  .scroll-flash-rect:not(.is-dismissed):focus,
-  .scroll-flash-rect:not(.is-dismissed):focus-within {
+  .poem-card:not(.is-dismissed):focus,
+  .poem-card:not(.is-dismissed):focus-within {
     opacity: 1 !important;
     visibility: visible !important;
     pointer-events: none !important;
   }
-  .scroll-flash-rect::before {
+  .poem-card::before {
     left: -1rem;
     right: -1rem;
     background: #ffffff;
   }
-  .scroll-flash-poem {
+  .poem-card-text {
     font-size: calc(var(--font-size-caption) * 1.12);
     line-height: 1.3;
     max-height: min(62vh, 19rem);
@@ -1177,22 +1177,22 @@ p {
     hyphens: auto;
     -webkit-hyphens: auto;
   }
-  .scroll-flash-poem p {
+  .poem-card-text p {
     margin-bottom: calc(var(--margin-s) * 0.65);
     text-align: justify;
   }
-  .scroll-flash-poem-attrib {
+  .poem-card-attrib {
     font-size: calc(var(--font-size-caption) * 1.12);
     line-height: 1.28;
   }
   /* First poem only ("That corpse..."): keep it less wide for better line balance */
-  .scroll-flash-rect:not(.scroll-flash-rect--b):not(.scroll-flash-rect--c):not(.scroll-flash-rect--d) {
-    --scroll-flash-w: min(14.2rem, calc(100vw - 2.6rem));
+  .poem-card:not(.poem-card--b):not(.poem-card--c):not(.poem-card--d) {
+    --poem-card-w: min(14.2rem, calc(100vw - 2.6rem));
   }
-  .scroll-flash-rect:not(.scroll-flash-rect--b):not(.scroll-flash-rect--c):not(.scroll-flash-rect--d)
-    .scroll-flash-poem,
-  .scroll-flash-rect:not(.scroll-flash-rect--b):not(.scroll-flash-rect--c):not(.scroll-flash-rect--d)
-    .scroll-flash-poem
+  .poem-card:not(.poem-card--b):not(.poem-card--c):not(.poem-card--d)
+    .poem-card-text,
+  .poem-card:not(.poem-card--b):not(.poem-card--c):not(.poem-card--d)
+    .poem-card-text
     p {
     text-align: left;
     text-justify: auto;

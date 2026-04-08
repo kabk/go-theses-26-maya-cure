@@ -36,19 +36,19 @@
   </head>
 
   <body>
-    <section class="poem-stage">
+    <section class="poem-overlay">
       <div
-        class="scroll-flash-rect"
+        class="poem-card"
         role="region"
         tabindex="0"
         aria-label="Excerpt from The Waste Land by T. S. Eliot"
       >
-        <blockquote class="scroll-flash-poem">
+        <blockquote class="poem-card-text">
           <p>
             That corpse you planted last year in your garden,<br />
             Has it begun to sprout? Will it bloom this year?
           </p>
-          <footer class="scroll-flash-poem-attrib">
+          <footer class="poem-card-attrib">
             <em>The Waste Land</em><br />
             by T.&nbsp;S.&nbsp;Eliot.
           </footer>
@@ -56,14 +56,14 @@
       </div>
     </section>
 
-    <section class="poem-stage poem-stage--b">
+    <section class="poem-overlay poem-overlay--b">
       <div
-        class="scroll-flash-rect scroll-flash-rect--b"
+        class="poem-card poem-card--b"
         role="region"
         tabindex="0"
         aria-label="Nothing Gold Can Stay by Robert Frost"
       >
-        <blockquote class="scroll-flash-poem">
+        <blockquote class="poem-card-text">
           <p>
             Nature&rsquo;s first green is gold,<br />
             Her hardest hue to hold.<br />
@@ -74,7 +74,7 @@
             So dawn goes down to day.<br />
             Nothing gold can stay.
           </p>
-          <footer class="scroll-flash-poem-attrib">
+          <footer class="poem-card-attrib">
             <em>Nothing Gold Can Stay</em><br />
             by Robert&nbsp;Frost.
           </footer>
@@ -82,16 +82,16 @@
       </div>
     </section>
 
-    <section class="poem-stage poem-stage--c">
+    <section class="poem-overlay poem-overlay--c">
       <div
-        class="scroll-flash-rect scroll-flash-rect--c"
+        class="poem-card poem-card--c"
         role="region"
         tabindex="0"
         aria-label="Excerpt from As I Lay Dying by William Faulkner"
       >
-        <blockquote class="scroll-flash-poem">
+        <blockquote class="poem-card-text">
           <p>My mother is a fish.</p>
-          <footer class="scroll-flash-poem-attrib">
+          <footer class="poem-card-attrib">
             <em>As I Lay Dying</em><br />
             by William&nbsp;Faulkner.
           </footer>
@@ -99,14 +99,14 @@
       </div>
     </section>
 
-    <section class="poem-stage poem-stage--d">
+    <section class="poem-overlay poem-overlay--d">
       <div
-        class="scroll-flash-rect scroll-flash-rect--d"
+        class="poem-card poem-card--d"
         role="region"
         tabindex="0"
         aria-label="Excerpt from Hamlet by William Shakespeare"
       >
-        <blockquote class="scroll-flash-poem">
+        <blockquote class="poem-card-text">
           <p>
             A man may fish with<br />
             the worm that hath<br />
@@ -114,7 +114,7 @@
             the fish that hath fed of<br />
             that worm.
           </p>
-          <footer class="scroll-flash-poem-attrib">
+          <footer class="poem-card-attrib">
             <em>Hamlet</em><br />
             by William&nbsp;Shakespeare.
           </footer>
@@ -655,48 +655,48 @@
     </div>
     <script src="https://unpkg.com/headroom.js"></script>
     <script>
-      var h = document.getElementById("site-headroom");
-      if (h) new Headroom(h).init();
-      var intro = document.querySelector(".intro-screen");
+      var headerBar = document.getElementById("site-headroom");
+      if (headerBar) new Headroom(headerBar).init();
+      var introSection = document.querySelector(".intro-screen");
 
       function showHideHeaderAtTop() {
-        if (!h || !intro) return;
-        var introBottom = intro.getBoundingClientRect().bottom;
-        h.style.display = introBottom > 40 ? "none" : "";
+        if (!headerBar || !introSection) return;
+        var introBottom = introSection.getBoundingClientRect().bottom;
+        headerBar.style.display = introBottom > 40 ? "none" : "";
       }
 
-      var t = document.getElementById("left-column-chapter-title");
-      var s = document.querySelectorAll(".essay-section[id^='chapter-']");
-      var m = document.querySelector(".corner-menu-wrap");
-      var c = document.querySelector(".chapter-menu-close");
-      var links = document.querySelectorAll(".corner-menu a[href^='#']");
-      var poems = document.querySelectorAll(".scroll-flash-poem");
-      function u() {
-        if (!t || !s.length) return;
-        var y = (h ? h.offsetHeight : 88) + 12;
-        for (var i = 0; i < s.length; i++) {
-          if (s[i].getBoundingClientRect().top <= y) {
-            var n = document.querySelector('.corner-menu a[href="#' + s[i].id + '"] .toc-title');
-            if (n) t.textContent = n.textContent.trim();
+      var chapterTitle = document.getElementById("left-column-chapter-title");
+      var chapterSections = document.querySelectorAll(".essay-section[id^='chapter-']");
+      var chapterMenu = document.querySelector(".corner-menu-wrap");
+      var closeMenuButton = document.querySelector(".chapter-menu-close");
+      var chapterLinks = document.querySelectorAll(".corner-menu a[href^='#']");
+      var poemCards = document.querySelectorAll(".poem-card-text");
+      function updateChapterTitleOnScroll() {
+        if (!chapterTitle || !chapterSections.length) return;
+        var triggerY = (headerBar ? headerBar.offsetHeight : 88) + 12;
+        for (var i = 0; i < chapterSections.length; i++) {
+          if (chapterSections[i].getBoundingClientRect().top <= triggerY) {
+            var sectionTitle = document.querySelector('.corner-menu a[href="#' + chapterSections[i].id + '"] .toc-title');
+            if (sectionTitle) chapterTitle.textContent = sectionTitle.textContent.trim();
           }
         }
       }
       addEventListener("scroll", showHideHeaderAtTop, { passive: true });
       addEventListener("resize", showHideHeaderAtTop);
       addEventListener("load", showHideHeaderAtTop);
-      addEventListener("scroll", u, { passive: true });
-      addEventListener("resize", u);
-      addEventListener("load", u);
-      if (c && m) c.addEventListener("click", function () { m.removeAttribute("open"); });
-      links.forEach(function (a) {
-        a.addEventListener("click", function () {
-          if (m) m.removeAttribute("open");
+      addEventListener("scroll", updateChapterTitleOnScroll, { passive: true });
+      addEventListener("resize", updateChapterTitleOnScroll);
+      addEventListener("load", updateChapterTitleOnScroll);
+      if (closeMenuButton && chapterMenu) closeMenuButton.addEventListener("click", function () { chapterMenu.removeAttribute("open"); });
+      chapterLinks.forEach(function (link) {
+        link.addEventListener("click", function () {
+          if (chapterMenu) chapterMenu.removeAttribute("open");
         });
       });
-      poems.forEach(function (p) {
-        p.addEventListener("click", function () {
-          var card = p.closest(".scroll-flash-rect");
-          if (card) card.classList.add("is-dismissed");
+      poemCards.forEach(function (poemCard) {
+        poemCard.addEventListener("click", function () {
+          var poemContainer = poemCard.closest(".poem-card");
+          if (poemContainer) poemContainer.classList.add("is-dismissed");
         });
       });
     </script>
