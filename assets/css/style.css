@@ -307,6 +307,7 @@ body {
   padding: max(2.95rem, 5.35vmin) max(2.7rem, 4.9vmin);
   /* overflow-x:hidden on body breaks position:sticky for poem cards (scroll containment) */
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .intro-screen {
